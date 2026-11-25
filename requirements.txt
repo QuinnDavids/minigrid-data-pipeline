@@ -1,0 +1,8 @@
+pandas>=2.1
+numpy>=1.26
+pyarrow>=14
+duckdb>=1.0
+pytest>=8
+ruff>=0.4
+# Installs this project's own code (src/pipeline) so "python -m pipeline run" works.
+-e .

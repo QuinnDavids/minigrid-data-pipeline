@@ -1,0 +1,143 @@
+{
+  "sources": {
+    "customers": {
+      "rows_in": 315,
+      "missing_markers": {
+        "phone": 10,
+        "email": 24,
+        "community": 7,
+        "household_size": 16,
+        "plan_id": 5,
+        "signup_date": 8
+      },
+      "set_to_missing": {
+        "household_size: unreadable": 0,
+        "household_size: outside 1-30": 11,
+        "signup_date: unparseable": 0
+      },
+      "dropped_missing_key": 0,
+      "exact_duplicates_removed": 1,
+      "conflicting_duplicates_merged": 14,
+      "rows_out": 300
+    },
+    "tariff_plans": {
+      "rows_in": 16,
+      "missing_markers": {},
+      "set_to_missing": {
+        "price_per_kwh: unreadable": 0
+      },
+      "dropped_missing_key": 0,
+      "exact_duplicates_removed": 12,
+      "conflicting_duplicates_merged": 0,
+      "rows_out": 4
+    },
+    "meter_readings": {
+      "rows_in": 32200,
+      "missing_markers": {
+        "energy_used": 893,
+        "peak_load_kw": 1242,
+        "outage_hours": 613
+      },
+      "set_to_missing": {
+        "reading_date: unparseable": 0,
+        "energy_used: unreadable or unknown unit": 351,
+        "energy_used: negative": 282,
+        "peak_load_kw: unreadable or unknown unit": 0,
+        "peak_load_kw: outside 0-20": 279,
+        "outage_hours: unreadable or unknown unit": 0,
+        "outage_hours: outside 0-24": 327
+      },
+      "dropped_missing_key": 0,
+      "exact_duplicates_removed": 920,
+      "conflicting_duplicates_merged": 613,
+      "rows_out": 30667
+    },
+    "payments": {
+      "rows_in": 5521,
+      "missing_markers": {
+        "is_reversed": 61
+      },
+      "set_to_missing": {
+        "payment_date: unparseable": 0,
+        "amount: unreadable": 0,
+        "amount: zero or negative": 0,
+        "channel: unknown spelling": 0,
+        "is_reversed: unknown spelling": 61
+      },
+      "dropped_missing_key": 0,
+      "exact_duplicates_removed": 0,
+      "conflicting_duplicates_merged": 0,
+      "rows_out": 5521
+    }
+  },
+  "payments": {
+    "payments_total": 5521,
+    "counted_in_totals": 5245,
+    "reversed_excluded": 154,
+    "unknown_reversed_flag_excluded": 122,
+    "orphan_payments": 108,
+    "orphan_customer_ids": [
+      "MG-0901",
+      "MG-0902",
+      "MG-0903",
+      "MG-0904",
+      "MG-0905",
+      "MG-0906",
+      "MG-0907",
+      "MG-0908",
+      "MG-0909",
+      "MG-0910",
+      "MG-0911",
+      "MG-0912",
+      "MG-0913",
+      "MG-0914",
+      "MG-0915",
+      "MG-0916",
+      "MG-0917",
+      "MG-0918",
+      "MG-0919",
+      "MG-0920"
+    ]
+  },
+  "join": {
+    "readings_in": 30667,
+    "payment_days_in": 4994,
+    "rows_after_outer_join": 31504,
+    "rows_reading_and_payment": 4157,
+    "rows_reading_only": 26510,
+    "rows_payment_only": 837,
+    "rows_dropped_unknown_customer": 102,
+    "rows_with_missing_plan": 425
+  },
+  "final_table": {
+    "rows": 31402,
+    "customers": 300,
+    "date_from": "2026-03-01",
+    "date_to": "2026-06-28",
+    "days_with_payment": 4892
+  },
+  "reconciliation": {
+    "customers: rows in = rows out + dropped + duplicates": true,
+    "tariff_plans: rows in = rows out + dropped + duplicates": true,
+    "meter_readings: rows in = rows out + dropped + duplicates": true,
+    "payments: rows in = rows out + dropped + duplicates": true,
+    "payments: counted + reversed + unknown flag = all clean payments": true,
+    "join: rows after outer join = final rows + unknown-customer rows": true
+  },
+  "validation": {
+    "has exactly the expected columns": true,
+    "customer_id never missing": true,
+    "date never missing": true,
+    "(customer_id, date) is unique": true,
+    "community never missing": true,
+    "household_band uses known labels": true,
+    "energy_kwh is 0 or more": true,
+    "peak_load_kw within 0-20": true,
+    "outage_hours within 0-24": true,
+    "amount_paid_ngn never missing and 0 or more": true,
+    "payment_count is 0 or more": true,
+    "payment_status matches payment_count": true,
+    "energy_cost_ngn is never negative": true,
+    "energy_cost_ngn missing whenever energy_kwh is missing": true
+  }
+}
